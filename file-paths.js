@@ -1,15 +1,13 @@
 module.exports = {listFilePaths}
 
 async function listFilePaths(path = '.') {
-  const ents = await readdir(path, { withFileTypes: true });
+  const ents = await readdir(path, { withFileTypes: true })
   const paths = await Promise.all(ents.map(ent => {
-    const res = resolve(path, ent.name);
-    console.log({res})
-    if (ent.isDirectory() && ent.name !== 'node_modules') {
-      return listFilePaths(res);
-    } else if (ent.isFile()) {
-      return res;
-    }
+    const res = resolve(path, ent.name)
+    console.log(ent.name)
+    if (ent.name == 'node_modules') return 
+    
+    return ent.isFile() ? res : listFilePaths(res)
   }));
   return paths.filter(Boolean).flat();
 }
