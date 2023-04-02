@@ -2,7 +2,7 @@
   "name": "teaching",
   "version": "1.0.0",
   "description": "an app to help me organize my teaching process",
-  "main": "go-mongo.js",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/unibreakfast/teaching.git"
@@ -16,6 +16,6 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "start": "node go-mongo.js"
+    "start": "node index.js"
   }
 }
