@@ -5,7 +5,7 @@ async function listFilePaths(path = '.') {
   const paths = await Promise.all(ents.map(ent => {
     const res = resolve(path, ent.name)
     console.log(ent.name)
-    if (ent.name == 'node_modules') return 
+    if (ent.name == 'node_modules' || ent.name == '.git') return 
     
     return ent.isFile() ? res : listFilePaths(res)
   }));
