@@ -1,6 +1,6 @@
 module.exports = {buildFileListing}
 
-async function builFileListing() {
+async function buildFileListing() {
   const paths = await listFilePaths()
   const contents = await Promise.all(paths.map(readFile))
   
