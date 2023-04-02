@@ -3,7 +3,7 @@ module.exports = {listFilePaths}
 async function listFilePaths(path = '.') {
   const ents = await readdir(path, { withFileTypes: true });
   const paths = await Promise.all(ents.map(ent => {
-    const res = resolve(dir, ent.name);
+    const res = resolve(path, ent.name);
     console.log({res})
     return ent.isDirectory() ? listFilePaths(res) : res;
   }));
