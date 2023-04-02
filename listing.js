@@ -8,7 +8,7 @@ async function buildFileListing() {
   let listing = ''
   
   for (let i = 0; i < paths.length; i++) {
-    listing += `${path}\n\`\`\`\n${content}\n\`\`\`\n\n`
+    listing += `${paths[i]}\n\`\`\`\n${contents[i]}\n\`\`\`\n\n`
   }
   
   return listing
