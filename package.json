@@ -7,7 +7,7 @@
     "type": "git",
     "url": "git+https://github.com/unibreakfast/teaching.git"
   },
-  "author": "Mikhail Ninin",
+  "author": "Mykhailo "Ninin" Velykoselskyi",
   "license": "MIT",
   "dependencies": {
     "mongodb": "^5.1.0"
