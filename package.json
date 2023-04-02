@@ -12,6 +12,9 @@
   "dependencies": {
     "mongodb": "^5.1.0"
   },
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "start": "node go-mongo.js"
   }
