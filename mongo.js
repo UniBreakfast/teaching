@@ -4,6 +4,8 @@ async function connectToMongo() {
   const client = new MongoClient(uri, options)
 
   await client.connect()
+  
+  console.log('Mongo client connected to cluster0')
 
   return client
 }
