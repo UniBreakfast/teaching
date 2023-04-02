@@ -4,7 +4,7 @@ async function listFilePaths(path = '.') {
   const ents = await readdir(path, { withFileTypes: true })
   const paths = await Promise.all(ents.map(ent => {
     const {name} = ent
-    const res = resolve(path, name)
+    const res = join(path, name)
     console.log(name)
     if (name == 'node_modules' || name == '.git') return 
     if (!name.match(/\.js$/) && name != 'package.json') return 
@@ -15,4 +15,4 @@ async function listFilePaths(path = '.') {
 }
 
 const {readdir} = require('fs/promises')
-const {resolve} = require('path')
+const {join} = require('path')
