@@ -1,7 +1,7 @@
 module.exports = {getReady}
 
 async function getReady() {
-  const [servermongo] = await Promise.all([
+  const [server, mongo] = await Promise.all([
     prepareHttpServer(),
     connectToMongo(),
   ])
