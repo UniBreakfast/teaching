@@ -5,10 +5,13 @@ async function listFilePaths(path = '.') {
   const paths = await Promise.all(ents.map(ent => {
     const res = resolve(path, ent.name);
     console.log({res})
-    return ent.isDirectory() ? listFilePaths(res) : res;
+    if (ent.isDirectory() && ent.name !== 'node_modules') {
+      return listFilePaths(res);
+    } else if (ent.isFile()) {
+      return res;
+    }
   }));
-  console.log({paths})
-  return [].concat(...paths);
+  return paths.filter(Boolean).flat();
 }
 
 const {readdir} = require('fs/promises')
