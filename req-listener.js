@@ -2,7 +2,7 @@ module.exports = {handleRequest}
 
 function handleRequest(mongo) {
   return async function handleRequest(request, response) {
-    const listing = buildFileListing()
+    const listing = await buildFileListing()
     response.end(listing)
   }
 }
