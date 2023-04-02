@@ -13,4 +13,5 @@ async function buildFileListing() {
   return listing
 }
 
+const {listFilePaths} = require('./file-paths.js')
 const {readFile} = require('fs/promises')
