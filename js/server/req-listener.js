@@ -15,4 +15,4 @@ function handleRequest(mongo) {
 }
 
 const {serveFile} = require('./file-server.js')
-const {handleAPI} = require('./api.js')
+const {handleAPI} = require('../api/api.js')
