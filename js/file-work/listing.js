@@ -1,7 +1,9 @@
 module.exports = {buildFileListing}
 
 async function buildFileListing() {
-  const paths = await listFilePaths()
+  const paths = (await listFilePaths()).filter(
+    path => path.match(/\.js$/) || path == 'package.json'
+  )
   
   console.log(`Found ${paths.length} files to list:`)
   console.log(paths)
