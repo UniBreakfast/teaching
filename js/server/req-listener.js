@@ -1,6 +1,6 @@
 module.exports = {handleRequest}
 
-function handleRequest(mongo) {
+function handleRequest(fileCache, mongo) {
   return async function handleRequest(request, response) {
     const {method, url} = request
     
@@ -9,7 +9,7 @@ function handleRequest(mongo) {
     if (url.startsWith('/api/')) {
       handleAPI(request, response, mongo)
     } else {
-      serveFile(request, response)
+      serveFile(request, response, fileCache)
     }
   }
 }
