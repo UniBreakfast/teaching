@@ -2,9 +2,15 @@ module.exports = {handleRequest}
 
 function handleRequest(mongo) {
   return async function handleRequest(request, response) {
-    const listing = await buildFileListing()
-    response.end(listing)
+    const {url} = request
+    
+    if (url.startsWith('/api/')) {
+      handleAPI(request, response, mongo);
+    } else {
+      serveFile(request, response);
+    }
   }
 }
 
-const {buildFileListing} = require('./listing.js')
+const {serveFile} = require('./file-server.js')
+const {handleAPI} = require('./api.js')
