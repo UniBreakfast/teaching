@@ -7,7 +7,6 @@ async function listFilePaths(path = '.') {
     const res = join(path, name)
     
     if (name == 'node_modules' || name == '.git') return 
-    if (!name.match(/\.js$/) && name != 'package.json') return 
     
     return ent.isFile() ? res : listFilePaths(res)
   }));
