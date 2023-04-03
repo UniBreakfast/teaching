@@ -6,4 +6,4 @@ async function run({server, mongo}) {
   console.log('request handler is listening...')
 }
 
-const {handleRequest} = require('./req-listener.js')
+const {handleRequest} = require('./server/req-listener.js')
