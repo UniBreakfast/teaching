@@ -4,7 +4,7 @@ module.exports = {typeDictionary}
 
 const utf = '; charset=utf-8'
 
-Object.assign(typeDict, {
+Object.assign(typeDictionary, {
   htm: 'text/html'+utf,
   html: 'text/html'+utf,
   json: 'application/json'+utf,
