@@ -2,12 +2,14 @@ module.exports = {handleRequest}
 
 function handleRequest(mongo) {
   return async function handleRequest(request, response) {
-    const {url} = request
+    const {method, url} = request
+    
+    console.log(`${method} ${url} requested`)
     
     if (url.startsWith('/api/')) {
-      handleAPI(request, response, mongo);
+      handleAPI(request, response, mongo)
     } else {
-      serveFile(request, response);
+      serveFile(request, response)
     }
   }
 }
