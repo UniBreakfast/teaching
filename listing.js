@@ -3,7 +3,7 @@ module.exports = {buildFileListing}
 async function buildFileListing() {
   const paths = await listFilePaths()
   
-  console.log(`Found ${path.length} files to list:`)
+  console.log(`Found ${paths.length} files to list:`)
   console.log(paths)
   
   const contents = await Promise.all(paths.map(path => readFile(path)))
