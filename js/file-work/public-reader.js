@@ -1,20 +1,9 @@
 module.exports = {readPublicFiles}
 
 async function readPublicFiles() {
-  
-}
+  const paths = await listFilePaths('public')
 
-async function buildFileListing() {
-
-  const paths = await listFilePaths()
-
-  
-
-  console.log(`Found ${paths.length} files to list:`)
-
-  
-  
-  
+  console.log(`Going to cache ${paths.length} public files:`)
   console.log(paths)
 
   const contents = await Promise.all(paths.map(path => readFile(path)))
