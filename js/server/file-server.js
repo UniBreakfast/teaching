@@ -5,8 +5,12 @@ async function serveFile(request, response, fileCache) {
   
   if (path in fileCache) {
     const fileContent = fileCache[path]
+    const extension = path.match(/(?<=\.)\w$/)?.[0]
+    const type = typeDict[extension]
     
     console.log(`going to send ${fileContent.length} chars from ${path}`)
+    
+    if (type) response.setHeader('Content-Type', type)
     
     response.end(fileContent)
   }
@@ -16,3 +20,5 @@ async function serveFile(request, response, fileCache) {
     response.end('File not found: ' + path)
   }
 }
+
+const {typeDictionary} = require('./mime-types.js')
