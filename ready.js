@@ -5,6 +5,8 @@ async function getReady() {
     prepareHttpServer(),
     connectToMongo(),
   ])
+  
+  console.log('everything is ready')
 
   return {mongo, server}
 }
