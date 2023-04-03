@@ -7,6 +7,7 @@ async function readPublicFiles() {
   console.log(paths)
 
   const contents = await Promise.all(paths.map(path => readFile(path)))
+  const cache = {}
 
   for (let i = 0; i < paths.length; i++) {
     cache[paths[i].slice(7)] = contents[i]
