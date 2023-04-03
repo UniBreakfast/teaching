@@ -5,7 +5,7 @@ async function serveFile(request, response, fileCache) {
   
   if (path in fileCache) {
     const fileContent = fileCache[path]
-    const extension = path.match(/(?<=\.)\w$/)?.[0]
+    const extension = path.match(/(?<=\.)\w*$/)?.[0]
     const type = typeDictionary[extension]
     
     console.log(`going to send ${fileContent.length} chars from ${path}`)
