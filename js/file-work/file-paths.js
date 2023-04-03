@@ -14,4 +14,4 @@ async function listFilePaths(path = '.') {
 }
 
 const {readdir} = require('fs/promises')
-const {join} = require('path')
+const {join} = require('path/posix')
