@@ -19,4 +19,4 @@ Object.assign(typeDict, {
   mp3: 'audio/mpeg',
   mp4: 'video/mp4',
   js: 'application/javascript'+utf,
-}
+})
