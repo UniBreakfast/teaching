@@ -5,7 +5,7 @@ async function listFilePaths(path = '.') {
   const paths = await Promise.all(ents.map(ent => {
     const {name} = ent
     const res = join(path, name)
-    console.log(name)
+    
     if (name == 'node_modules' || name == '.git') return 
     if (!name.match(/\.js$/) && name != 'package.json') return 
     
