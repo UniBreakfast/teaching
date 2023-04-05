@@ -6,7 +6,7 @@ async function getStudents() {
   const response = await fetch('/api/students')
   const students = await response.json()
 
-  returns students
+  return students
 }
 
 function showStudents(students) {
