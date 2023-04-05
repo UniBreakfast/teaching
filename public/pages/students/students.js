@@ -1,4 +1,4 @@
-const studentsList = document.getElementById()
+const studentsList = document.getElementById('students')
 
 getStudents().then(showStudents)
 
@@ -10,9 +10,15 @@ async function getStudents() {
 }
 
 function showStudents(students) {
-  studentsList.innerHTML = `
+  studentsList.innerHTML = students.map(buildStudentItem).join('')
+}
+
+function buildStudentItem(student) {
+  const {name} = student
+
+  return `
     <li>
-      ${}
+      ${name}
     </li>
   `
 }
