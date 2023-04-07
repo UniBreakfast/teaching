@@ -1,3 +1,7 @@
+import {notify} from '../../common/notification.js
+
+notify('hi, user')
+
 const studentsList = document.getElementById('students')
 
 getStudents().then(showStudents)
