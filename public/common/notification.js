@@ -33,4 +33,5 @@ const cardStyle = `
   max-width: 90vw;
   padding: 5px;
   white-space: pre;
+  background-color: yellow;
 `
