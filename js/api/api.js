@@ -1,7 +1,8 @@
 module.exports = {handleAPI}
 
 async function handleAPI(request, response, mongo) {
-  const endpoint = request.url.slice(5)
+  const {method, url} = request 
+  const endpoint = url.slice(5)
 
   console.log('endpoint requested: ' + endpoint)
 
@@ -14,6 +15,14 @@ async function handleAPI(request, response, mongo) {
     response.setHeader('Content-Type', 'application/json')
     response.end(JSON.stringify(students))
   } else
+  if (endpoint == 'student') {
+    const body = await getBody(request)
+    const {id} = JSON.parse(body)
+    const studentsCollection = mongo.db('teaching').collection('students')
+    const result = await studentsCollection.removeOne({_id: new ObjectId(id)})
+    
+    console.log(result)
+  } else
   if (endpoint == 'listing') {
     const listing = await buildFileListing()
     
@@ -25,4 +34,6 @@ async function handleAPI(request, response, mongo) {
   }
 }
 
+const {getBody} = require(',/body.js')
 const {buildFileListing} = require('../file-work/listing.js')
+const {ObjectId} = require('mongodb')
