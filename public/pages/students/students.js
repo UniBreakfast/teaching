@@ -15,7 +15,7 @@ studentsList.onclick = async e => {
     
     btn.disabled = true 
     
-    if (result.success) li.remove
+    if (result.success) li.remove()
     else btn.disabled = false
   }
 }
