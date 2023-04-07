@@ -6,7 +6,7 @@ const studentsList = document.getElementById('students')
 
 getStudents().then(showStudents)
 
-studentsList.onclick = async e => {
+studentsList.onclick = async (e) => {
   if (e.target.innerHTML = 'remove') {
     const btn = e.target
     const li = btn.closest('li')
