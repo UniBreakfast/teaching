@@ -1,4 +1,4 @@
-import {notify} from '../../common/notification.js
+import {notify} from '../../common/notification.js' 
 
 notify('hi, user')
 
