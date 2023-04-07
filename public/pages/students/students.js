@@ -1,5 +1,5 @@
 import {notify} from '../../common/notification.js' 
-
+body.prepend(42)
 notify('hi, user')
 
 const studentsList = document.getElementById('students')
@@ -11,9 +11,10 @@ studentsList.onclick = async (e) => {
     const btn = e.target
     const li = btn.closest('li')
     const id = li.dataset.id
-    const result = await removeStudent(id)
     
-    btn.disabled = true 
+    btn.disabled = true
+    
+    const result = await removeStudent(id)
     
     if (result.success) li.remove()
     else btn.disabled = false
@@ -43,7 +44,7 @@ function buildStudentItem(student) {
   const {name, _id} = student
 
   return `
-    <li data-id="_id">
+    <li data-id="${_id}">
       ${name} <button>remove</button>
     </li>
   `
