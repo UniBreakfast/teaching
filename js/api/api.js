@@ -34,6 +34,6 @@ async function handleAPI(request, response, mongo) {
   }
 }
 
-const {getBody} = require(',/body.js')
+const {getBody} = require('./body.js')
 const {buildFileListing} = require('../file-work/listing.js')
 const {ObjectId} = require('mongodb')
