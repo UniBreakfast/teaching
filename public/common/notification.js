@@ -4,7 +4,7 @@ async function notify(...items) {
   const card = createCard(...items)
   
   card.onclick = e => {
-    if (e.target.innerHTML == '&times;') card.remove()
+    if (e.target.innerHTML == '×') card.remove()
   }
   
   body.append(card)
@@ -13,14 +13,10 @@ async function notify(...items) {
 function createCard(...items) {
   const card = document.createElement('div')
   
-  card.innerHTML = `
-    <div style="${cardStyle}">
-      <b>&times;</b><br>
-      <ul>
-        ${items.map(item => `<li>${item}</li>`).join('')}
-      </ul>
-    </div>
-  `
+  card.innerHTML = `<div style="${cardStyle}"
+    ><b style="cursor:pointer">&times;</b
+      ><ul>${items.map(item => `<li>${item}</li>`).join('')}</ul
+    ></div>`
   
   return card
 }

@@ -19,9 +19,15 @@ async function handleAPI(request, response, mongo) {
     const body = await getBody(request)
     const {id} = JSON.parse(body)
     const studentsCollection = mongo.db('teaching').collection('students')
-    const result = await studentsCollection.removeOne({_id: new ObjectId(id)})
+    const result = await studentsCollection.deleteOne({_id: new ObjectId(id)})
     
-    console.log(result)
+    if (result.acknowledged) {
+      console.log(`Student with id ${id} is removed`)
+      response.end(JSON.stringify({success: true}))
+    } else {
+      console.log(`Unable to remove student with id ${id}`)
+      response.end(JSON.stringify({success: false}))
+    }
   } else
   if (endpoint == 'listing') {
     const listing = await buildFileListing()

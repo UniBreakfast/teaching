@@ -1,7 +1,7 @@
 import {notify} from '../../common/notification.js' 
 
 notify('hi, user')
-/*
+
 const studentsList = document.getElementById('students')
 
 getStudents().then(showStudents)
@@ -21,8 +21,8 @@ studentsList.onclick = async (e) => {
   }
 }
 
-function removeStudent(id) {
-  const init = {method: 'DELETE', body: JSON.stringify({id})
+async function removeStudent(id) {
+  const init = {method: 'DELETE', body: JSON.stringify({id})}
   const response = await fetch('/api/student', init)
   const result = await response.json()
   
@@ -49,4 +49,3 @@ function buildStudentItem(student) {
     </li>
   `
 }
-*/
