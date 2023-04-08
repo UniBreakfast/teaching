@@ -1,5 +1,5 @@
 export {notify}
-body.prepend(24)
+
 async function notify(...items) {
   const card = createCard(...items)
   
@@ -14,7 +14,7 @@ function createCard(...items) {
   const card = document.createElement('div')
   
   card.innerHTML = `
-    <div style="${cardStyle}>
+    <div style="${cardStyle}">
       <b>&times;</b><br>
       <ul>
         ${items.map(item => `<li>${item}</li>`).join('')}
@@ -28,7 +28,7 @@ function createCard(...items) {
 const cardStyle = `
   position: fixed;
   right: 10px;
-  bottom: 10ps;
+  bottom: 10px;
   width: 500px;
   max-width: 90vw;
   padding: 5px;
