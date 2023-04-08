@@ -1,5 +1,5 @@
 import {notify} from '../../common/notification.js' 
-body.prepend(42)
+
 notify('hi, user')
 /*
 const studentsList = document.getElementById('students')
