@@ -14,10 +14,14 @@ async function connectToMongo() {
   } while (true)
   
   console.log('Mongo client connected to cluster0')
-
+  await sleep(15000)
   return client
 }
 
 const { MongoClient, ServerApiVersion } = require('mongodb')
 const uri = process.env.MONGO_CONN_STR
 const options = { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 }
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}

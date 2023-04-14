@@ -2,11 +2,11 @@ module.exports = {handleAPI}
 
 async function handleAPI(request, response, mongo) {
   const {method, url} = request 
-  const endpoint = url.slice(5)
+  const endpoint = method.toLowerCase() + url.slice(4)
 
   console.log('endpoint requested: ' + endpoint)
 
-  if (endpoint == 'students') {
+  if (endpoint == 'get/students') {
     const studentsCollection = mongo.db('teaching').collection('students')
     const students = await studentsCollection.find().toArray()
     
@@ -15,7 +15,21 @@ async function handleAPI(request, response, mongo) {
     response.setHeader('Content-Type', 'application/json')
     response.end(JSON.stringify(students))
   } else
-  if (endpoint == 'student') {
+  if (endpoint == 'post/student') {
+    const body = await getBody(request)
+    const student = JSON.parse(body)
+    const studentsCollection = mongo.db('teaching').collection('students')
+    const result = await studentsCollection.insertOne(student)
+    
+    if (result.acknowledged) {
+      console.log(`Student with id ${result.insertedId} is added`)
+      response.end(JSON.stringify({success: true, id: result.insertedId}))
+    } else {
+      console.log(`Unable to add student`)
+      response.end(JSON.stringify({success: false}))
+    }
+  } else
+  if (endpoint == 'delete/student') {
     const body = await getBody(request)
     const {id} = JSON.parse(body)
     const studentsCollection = mongo.db('teaching').collection('students')
@@ -29,7 +43,7 @@ async function handleAPI(request, response, mongo) {
       response.end(JSON.stringify({success: false}))
     }
   } else
-  if (endpoint == 'listing') {
+  if (endpoint == 'get/listing') {
     const listing = await buildFileListing()
     
     console.log(`File listing ${listing.length} characters long is sent`)

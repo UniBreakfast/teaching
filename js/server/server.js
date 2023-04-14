@@ -3,6 +3,8 @@ module.exports = {prepareHttpServer}
 async function prepareHttpServer() {
   const server = createServer()
 
+  server.on('request', preHandler)
+
   return new Promise((resolve, reject) => {
     server.on('error', reject)
 
@@ -19,3 +21,4 @@ async function prepareHttpServer() {
 
 const port = process.env.PORT
 const {createServer} = require('http')
+const {preHandler} = require('./req-handler.js')
