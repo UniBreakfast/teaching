@@ -1,6 +1,6 @@
-module.exports = {handleRequest}
+module.exports = {makeRequestHandler}
 
-function handleRequest(fileCache, mongo) {
+function makeRequestHandler(fileCache, mongo) {
   return async function handleRequest(request, response) {
     const {method, url} = request
     
