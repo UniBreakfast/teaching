@@ -5,6 +5,9 @@ async function getBody(stream) {
   
   for await (const chunk of stream) body += chunk
 
-  return body
+  try {
+    return JSON.parse(body)
+  } catch {
+    return body
+  }
 }
- 

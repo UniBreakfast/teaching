@@ -1,46 +1,42 @@
 module.exports = {handleAPI}
 
 async function handleAPI(request, response, mongo) {
+  const {respond, send} = prepareToRespond(response)
   const {method, url} = request 
   const endpoint = method.toLowerCase() + url.slice(4)
+  const body = method == 'GET' ? null : await getBody(request) 
 
   console.log('endpoint requested: ' + endpoint)
+  response.setHeader('Content-Type', 'application/json')
 
   if (endpoint == 'get/students') {
-    const studentsCollection = mongo.db('teaching').collection('students')
-    const students = await studentsCollection.find().toArray()
+    const students = await mongo.read('students')
     
     console.log(students.length + ' student records found')
-
-    response.setHeader('Content-Type', 'application/json')
-    response.end(JSON.stringify(students))
+    send(students)
   } else
   if (endpoint == 'post/student') {
-    const body = await getBody(request)
-    const student = JSON.parse(body)
-    const studentsCollection = mongo.db('teaching').collection('students')
-    const result = await studentsCollection.insertOne(student)
+    const student = body
+    const id = await mongo.create('students', student)
     
-    if (result.acknowledged) {
-      console.log(`Student with id ${result.insertedId} is added`)
-      response.end(JSON.stringify({success: true, id: result.insertedId}))
+    if (id) {
+      console.log(`Student with id ${id} is added`)
+      respond({id})
     } else {
       console.log(`Unable to add student`)
-      response.end(JSON.stringify({success: false}))
+      respond(false)
     }
   } else
   if (endpoint == 'delete/student') {
-    const body = await getBody(request)
-    const {id} = JSON.parse(body)
-    const studentsCollection = mongo.db('teaching').collection('students')
-    const result = await studentsCollection.deleteOne({_id: new ObjectId(id)})
+    const {id} = body
+    const done = await mongo.delete('students', id)
     
-    if (result.acknowledged) {
+    if (done) {
       console.log(`Student with id ${id} is removed`)
-      response.end(JSON.stringify({success: true}))
+      respond(true)
     } else {
       console.log(`Unable to remove student with id ${id}`)
-      response.end(JSON.stringify({success: false}))
+      respond(false)
     }
   } else
   if (endpoint == 'get/listing') {
@@ -54,6 +50,6 @@ async function handleAPI(request, response, mongo) {
   }
 }
 
+const {prepareToRespond} = require('./respond.js')
 const {getBody} = require('./body.js')
 const {buildFileListing} = require('../file-work/listing.js')
-const {ObjectId} = require('mongodb')
