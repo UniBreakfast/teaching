@@ -1,10 +1,11 @@
-import {notify} from '../../common/notification.js' 
+import {api} from '../../common/js/api/api.js'
+import {notify} from '../../common/js/notification.js'
 
 notify('hi, user')
 
 const studentsList = document.getElementById('students')
 
-getStudents().then(showStudents)
+api.get('students').then(showStudents)
 
 studentsList.onclick = async (e) => {
   if (e.target.innerHTML == 'remove') {
@@ -14,26 +15,11 @@ studentsList.onclick = async (e) => {
     
     btn.disabled = true
     
-    const result = await removeStudent(id)
+    const result = await api.delete('student', {id})
     
     if (result.success) li.remove()
     else btn.disabled = false
   }
-}
-
-async function removeStudent(id) {
-  const init = {method: 'DELETE', body: JSON.stringify({id})}
-  const response = await fetch('/api/student', init)
-  const result = await response.json()
-  
-  return result 
-}
-
-async function getStudents() {
-  const response = await fetch('/api/students')
-  const students = await response.json()
-
-  return students
 }
 
 function showStudents(students) {
